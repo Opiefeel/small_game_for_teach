@@ -83,4 +83,9 @@ async def end(
     user: User = Depends(get_current_user),
     db: AsyncSession = Depends(get_db)
 ):
-    return await end_game(user, db)
+    state = user_game_state.get(user.id)
+    if not state:
+        raise HTTPException(status_code=400, detail="Сначала начни игру через /start")
+    result = await end_game(user, db)
+    user_game_state.pop(user.id, None)
+    return result
