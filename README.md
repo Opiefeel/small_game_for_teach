@@ -7,24 +7,31 @@
 	•	Ведение статистики пользователя и истории ударов
 	•	Swagger UI для тестирования API
 
-Быстрый старт
+Как начать же всё-таки, команды дальше:
 
-1. Клонируй репозиторий через команду git clone <repo-url>
-cd small_game_for_teach
+1. Клонируй репозиторий через команду ```git clone <repo-url>```
 
-2. Создай и активируй виртуальное окружение python3.12 -m venv venv
-source venv/bin/activate
+- Далее переместись на него ```cd small_game_for_teach```
+
+2. Создай и активируй виртуальное окружение
+
+```python3.12 -m venv venv```
+
+```source venv/bin/activate```
 
 3. Установи зависимости pip install --upgrade pip
-pip install -r requirements.txt
+```pip install -r requirements.txt```
 
-4. Создай файл .env в корне проекта туда надо вставить свой SECRET_KEY=your_secret_key
+4. Создай файл .env в корне проекта туда надо вставить свой ```SECRET_KEY=твой ключ```
 
-p.s Секретный ключ можно сгенерировать:python3 -c "import secrets; print(secrets.token_urlsafe(32))"
+P.S Секретный ключ можно сгенерировать через команду:
+```
+python3 -c "import secrets; print(secrets.token_urlsafe(32))"
+```
 
 5. Создай структуру таблиц python3 app/create_tables.py
 
-6. Запусти MailHog для перехвата писем (если тестируешь email)
+6. Запусти MailHog (ну или любой другой что найдёшь) для перехвата писем (если тестируешь email)
 Для мака так:
 brew install mailhog
 mailhog
@@ -35,25 +42,35 @@ mailhog
 
 7. Запусти серверuvicorn app.main:app --reload
 
-Как пользоваться
-	1.	Открой Swagger UI: http://127.0.0.1:8000/docs↗
-	2.	Запроси токен на свою почту через /auth/request
-	3.	Найди письмо в MailHog, скопируй токен
-	4.	Вставь токен через кнопку “Authorize” в Swagger UI
-	5.	Играй:
-	▫	‎⁠/start⁠ — начать игру
-	▫	‎⁠/hit⁠ — ударить по дырке
-	▫	‎⁠/end⁠ — завершить игру и посмотреть финальную статистику
-	▫	‎⁠/me⁠ — посмотреть свою статистику
+**Как пользоваться:**
+1.	Открой Swagger UI: http://127.0.0.1:8000/docs↗
+2. Запроси токен на свою почту через /auth/request
+3.	Найди письмо в MailHog, скопируй токен 
+4. Вставь токен через кнопку “Authorize” в Swagger UI
 
-Прямой доступ к базе
+Играй:
+- ‎⁠/start⁠ — начать игру 
+- ‎⁠/hit⁠ — ударить по дырке 
+- ‎⁠/end⁠ — завершить игру и посмотреть финальную статистику 
+- ‎⁠/me⁠ — посмотреть свою статистику
 
-База данных — обычный SQLite-файл называться будет ‎⁠wackamole.db⁠.  Можно открыть через любой GUI-клиент (DB Browser for SQLite, DBeaver) или через консоль:sqlite3 wackamole.db
+**Прямой доступ к базе**
+
+База данных — обычный SQLite-файл называться будет ‎⁠wackamole.db⁠. 
+ 
+Можно открыть через любой GUI-клиент (DB Browser for SQLite, DBeaver) или через консоль:sqlite3 wackamole.db
+
 .tables (выбери табличку)
+
 SELECT * FROM users;
+
 SELECT * FROM requests;
 
-FAQ:
-	•	Ошибка SMTP: Запусти MailHog или пропиши реальные SMTP-настройки в ‎⁠.env⁠.
-	•	Ошибка “no such table”: Не забудь создать таблицы через ‎⁠python3 app/create_tables.py⁠.
-	•	Проблемы с токеном: Убедись, что вставляешь только сам JWT, без “Bearer “.
+
+**FAQ:**
+
+Ошибка SMTP: Запусти MailHog или пропиши реальные SMTP-настройки в ‎⁠.env⁠. 
+
+Ошибка “no such table”: Не забудь создать таблицы через ‎⁠python3 app/create_tables.py⁠. 
+
+Проблемы с токеном: Убедись, что вставляешь только сам JWT, без “Bearer “.
